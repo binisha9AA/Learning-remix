@@ -1,14 +1,14 @@
 import { Form, useLoaderData } from '@remix-run/react';
 import type { FunctionComponent } from 'react';
 import { getContact, type ContactRecord } from '../data';
-import { json } from '@remix-run/node';
+import { LoaderFunctionArgs, json } from '@remix-run/node';
 import invariant from 'tiny-invariant';
 
-export const loader = async ({ params }) => {
+export const loader = async ({ params }: LoaderFunctionArgs) => {
   //Extracting contact ID from the URL i.e
   // the dynamic variable on filename "$contactId"
-  invariant(params.customerId, 'Please check your filename & variable name');
-  const contactID = params.customerId;
+  invariant(params.contactId, 'Please check your filename & variable name');
+  const contactID = params.contactId;
   //Fetching data of the Contact ID from the database
   const contact = await getContact(contactID);
   //Handling the case when the contact is 'null'

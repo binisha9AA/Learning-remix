@@ -13,13 +13,19 @@ import {
   ScrollRestoration,
 } from '@remix-run/react';
 import appStylesHref from './app.css';
-import { getContacts } from './data';
+import { createEmptyContact, getContacts } from './data';
 
+// used for read opeartion of crud
 export const loader = async () => {
   const contacts = await getContacts();
   return json({ contacts });
 };
 
+// used for create operation crud
+export const action = async () => {
+  const contact = await createEmptyContact();
+  return json({ contact });
+};
 export default function App() {
   const { contacts } = useLoaderData<typeof loader>();
 
